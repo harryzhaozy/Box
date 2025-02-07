@@ -65,17 +65,17 @@ jobs:
         working-directory: TVBoxOSC
         run: |
           rm -rf apk/
-          #mkdir -p apk/
-          #for file in `find ~ -name "*release*.apk" -print`; do
-          #  mv "$file" apk/TVBox_takagen99_${{ env.tag }}_Release.apk
-          #done
+          mkdir -p apk/
+          for file in `find ~ -name "*.apk" -print`; do
+            mv "$file" apk/TVBox_takagen99_${{ env.tag }}.apk
+          done
           #for file in `find ~ -name "*debug*.apk" -print`; do
           #  mv "$file" apk/TVBox_takagen99_${{ env.tag }}_Debug.apk
           #done
-          mkdir -p ${{ github.workspace }}/apk/
-          for file in `find ~ -name "*.apk" -print`; do
-            mv "$file" ${{ github.workspace }}/apk/
-          done
+          #mkdir -p ${{ github.workspace }}/apk/
+          #for file in `find ~ -name "*.apk" -print`; do
+          #  mv "$file" ${{ github.workspace }}/apk/
+          #done
       - name: Release and Upload Assets
         uses: softprops/action-gh-release@v1
         if: ${{ env.commit }}
