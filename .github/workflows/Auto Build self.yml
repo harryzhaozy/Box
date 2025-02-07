@@ -66,8 +66,15 @@ jobs:
         run: |
           rm -rf apk/
           mkdir -p apk/
-          for file in `find ~ -name "*.apk" -print`; do
-            mv "$file" apk/TVBox_takagen99_${{ env.tag }}.apk
+          #for file in `find ~ -name "*.apk" -print`; do
+          #  mv "$file" apk/TVBox_takagen99_${{ env.tag }}.apk
+          #done
+          #另一个方法
+          #find ~ -name "*.apk" -exec sh -c 'mv "$1" apk/TVBox_takagen99_${TAG}_$(date +%s).apk' sh {} \
+          for file in $(find ~ -name "*.apk" -print); do
+            filename=$(basename "$file")  # 提取文件名
+            new_filename="TVBOX_${filename}"  # 添加 "TVBOX_" 前缀
+            mv "$file" "apk/$new_filename"  # 移动并重命名文件
           done
           #for file in `find ~ -name "*debug*.apk" -print`; do
           #  mv "$file" apk/TVBox_takagen99_${{ env.tag }}_Debug.apk
